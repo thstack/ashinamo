@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-""" pymonitor client module: 获取网络数据，从/proc/net/dev 文件 """
+""" 获取网络数据，从/proc/net/dev 文件 """
 """ @Author: baoyiluo@gmail.com
     @Site: www.pythonpie.com
     @Date: 2013-05-23
@@ -62,7 +62,7 @@ def get_ProcNetDev(devices):
     """
 
     status=0; msgs=''; results='';
-    if not devices:
+    if devices == []:
         return (-1, 'Error: Params is None.', '')
     now_data = {} # 当前 /proc/net/dev 的值
     last_data = {} # 上一次 /proc/net/dev 的值， 时间跨度有调用程序决定

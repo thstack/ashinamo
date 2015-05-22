@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-""" pymonitor client module: 获取cpu数据， 从 /proc/stat 文件 """
+""" 获取cpu数据， 从 /proc/stat 文件 """
 """ @Author: baoyiluo@gmail.com
     @Site: www.pythonpie.com
     @Date: 2013-05-23

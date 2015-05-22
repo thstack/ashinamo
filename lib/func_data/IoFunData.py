@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-""" pymonitor client module: 获取IO数据， 从/proc/diststats 文件 """
+""" 获取IO数据， 从/proc/diststats 文件 """
 """ @Author: baoyiluo@gmail.com
     @Site: www.pythonpie.com
     @Date: 2013-05-23

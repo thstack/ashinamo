@@ -18,4 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^data/cpu/', 'appdata.views.getcpu'),
+    url(r'^data/mem/', 'appdata.views.getmem'),
+    url(r'^data/io/', 'appdata.views.getio'),
+    url(r'^data/net/', 'appdata.views.getnet'),
 ]

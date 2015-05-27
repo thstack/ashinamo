@@ -11,7 +11,7 @@
             var transdata = [];
 
              function getData() {
-                 if (recedata.length > 0)
+                 if (recedata.length > 0){
                      recedata = recedata.slice(1);
                      transdata = transdata.slice(1);
                      $.ajax({
@@ -31,7 +31,7 @@
                             }
                         }
                      });
-
+                 }
                  // Do a random walk
 
                  while (recedata.length < totalPoints) {

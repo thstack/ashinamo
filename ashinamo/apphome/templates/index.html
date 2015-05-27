@@ -15,7 +15,7 @@
              var transdata = [];
 
              function getData() {
-                 if (data.length > 0)
+                 if (data.length > 0){
                      data = data.slice(1);
                      $.ajax({
                         url: "{% url 'datacpu' %}",
@@ -26,6 +26,7 @@
                             }
                         }
                      });
+                 }
 
                  // Do a random walk
 
@@ -50,7 +51,7 @@
              // io data
 
              function getIoData() {
-                 if (readdata.length > 0)
+                 if (readdata.length > 0){
                      readdata = readdata.slice(1);
                      writedata = writedata.slice(1);
                      $.ajax({
@@ -70,7 +71,7 @@
                             }
                         }
                      });
-
+                 }
                  // Do a random walk
 
                  while (readdata.length < totalPoints) {
@@ -96,7 +97,7 @@
              // net data
 
              function getNetData() {
-                 if (recedata.length > 0)
+                 if (recedata.length > 0){
                      recedata = recedata.slice(1);
                      transdata = transdata.slice(1);
                      $.ajax({
@@ -116,6 +117,7 @@
                             }
                         }
                      });
+                 }
 
                  // Do a random walk
 

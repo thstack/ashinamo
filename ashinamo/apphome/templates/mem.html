@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+    <script type="text/javascript">
+         $(function() {
+
+             // We use an inline data source in the example, usually data would
+             // be fetched from a server
+
+             var data = [],
+                 totalPoints = 300;
+
+             function getData() {
+                 if (data.length > 0)
+                     data = data.slice(1);
+                     $.ajax({
+                        url: "{% url 'datamem' %}",
+                        dataType: "json",
+                        success:function(datas){
+                            if(datas[0] == 0){
+                                memdata = datas[2]['memused']*100/datas[2]['memtotal'];
+                                data.push(memdata);
+                            }
+                        }
+                     });
+
+                 // Do a random walk
+
+                 while (data.length < totalPoints) {
+                     y = 0;
+                     data.push(y);
+                 }
+
+                 // Zip the generated y values with the x values
+
+                 var res = [];
+                 for (var i = 0; i < data.length; ++i) {
+                     res.push([i, data[i]])
+                 }
+
+                 return res;
+             }
+
+             // Set up the control widget
+
+             var updateInterval = 1000;
+
+             var plot = $.plot("#placeholder", [ getData() ], {
+                 series: {
+                     shadowSize: 0   // Drawing is faster without shadows
+                 },
+                 yaxis: {
+                     min: 0,
+                     max: 100,
+                     tickFormatter: function suffixFormat(val, axis){
+                        return val.toFixed(axis.tickDecimals) + "%";
+                     }
+                 },
+                 xaxis: {
+                     show: false
+                 }
+             });
+              function update() {
+
+                 plot.setData([getData()]);
+
+                 // Since the axes don't change, we don't need to call plot.setupGrid()
+
+                 plot.draw();
+                 setTimeout(update, updateInterval);
+             }
+
+             update();
+
+             // Add the Flot version string to the footer
+
+             $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+         });
+    </script>
+       <div class="panel-heading">Mem</div>
+        <div class="panel-body">
+            <p>内存是计算机中重要的部件之一，它是与CPU进行沟通的桥梁。计算机中所有程序的运行都是在内存中进行的，因此内存的性能对计算机的影响非常大。内存(Memory)也被称为内存储器，其作用是用于暂时存放CPU中的运算数据，以及与硬盘等外部存储器交换的数据。只要计算机在运行中，CPU就会把需要运算的数据调到内存中进行运算，当运算完成后CPU再将结果传送出来，内存的运行也决定了计算机的稳定运行。 内存是由内存芯片、电路板、金手指等部分组成的。</p>
+            <div class="col-md-12"><hr /></div>
+               <div class="col-lg-12" style="height:350px;margin:0;padding:0;">
+                <div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div>
+               </div>
+        </div>
+
+{% endblock %}

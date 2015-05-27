@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+    <script type="text/javascript">
+         $(function() {
+
+             // We use an inline data source in the example, usually data would
+             // be fetched from a server
+
+             var recedata = [],
+                 totalPoints = 300;
+            var transdata = [];
+
+             function getData() {
+                 if (recedata.length > 0)
+                     recedata = recedata.slice(1);
+                     transdata = transdata.slice(1);
+                     $.ajax({
+                        url: "{% url 'datanet' %}",
+                        dataType: "json",
+                        success:function(datas){
+                            if(datas[0] == 0){
+                                var datadic = datas[2];
+                                receivedata = 0;
+                                transmitdata =0;
+                                for(var key in datadic){
+                                    transmitdata += parseInt(datadic[key]['transmit']);
+                                    receivedata += parseInt(datadic[key]['receive']);
+                                }    
+                                recedata.push(receivedata/1024);
+                                transdata.push(transmitdata/1024);
+                            }
+                        }
+                     });
+
+                 // Do a random walk
+
+                 while (recedata.length < totalPoints) {
+                     y = 0;
+                     recedata.push(y);
+                     transdata.push(y);
+                 }
+
+                 // Zip the generated y values with the x values
+
+                 var receres = [];
+                 var transres = [];
+                 for (var i = 0; i < recedata.length; ++i) {
+                     receres.push([i, recedata[i]])
+                 }
+                 for (var i = 0; i < transdata.length; ++i) {
+                     transres.push([i, transdata[i]])
+                 }
+
+                 return [{label: 'TRANSMIT', data: transres},{label: 'RECEIVE', data: receres}];
+             }
+
+             // Set up the control widget
+
+             var updateInterval = 1000;
+
+             var plot = $.plot("#placeholder", getData() , {
+                 series: {
+                     shadowSize: 0   // Drawing is faster without shadows
+                 },
+                 yaxis: {
+                     min: 0,
+                     max: 300,
+                     tickFormatter: function suffixFormat(val, axis){
+                        return val.toFixed(axis.tickDecimals) + " MB";
+                     }
+                 },
+                 xaxis: {
+                     show: false
+                 }
+             });
+              function update() {
+
+                 plot.setData(getData());
+
+                 // Since the axes don't change, we don't need to call plot.setupGrid()
+
+                 plot.draw();
+                 setTimeout(update, updateInterval);
+             }
+
+             update();
+
+             // Add the Flot version string to the footer
+
+             $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+         });
+    </script>
+       <div class="panel-heading">Net</div>
+        <div class="panel-body">
+            <p>在计算机领域中，网络是信息传输、接收、共享的虚拟平台，通过它把各个点、面、体的信息联系到一起，从而实现这些资源的共享。网络是人类发展史来最重要的发明，提高了科技和人类社会的发展。</p>
+            <div class="col-md-12"><hr /></div>
+               <div class="col-lg-12" style="height:350px;margin:0;padding:0;">
+                <div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div>
+               </div>
+        </div>
+
+{% endblock %}

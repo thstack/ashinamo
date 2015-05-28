@@ -1,0 +1,366 @@
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Ashinamo</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="plugin/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="plugin/jquery.flot.js"></script>
+    <link href="plugin/memory/c3-b03125fa.css" media="screen" rel="stylesheet" type="text/css">
+    <script>
+    $(function(){
+        var localhref = window.location.pathname; 
+        $('.anavbar').each(function(){
+            if($(this).attr('href') == localhref){
+                $(this).parent().addClass('active')
+            }
+        });
+
+    });
+    </script>
+    <style>
+    .col-lg-3{
+        width: 25%; 
+    }
+    </style>
+</head>
+<body>
+    <!--content start-->
+    <div class="container">
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a class="anavbar" href="index.html">Ashinamo</a></li>
+              <li><a class="anavbar" href="cpu.html">Cpu</a></li>
+              <li><a class="anavbar" href="mem.html">Memory</a></li>
+              <li><a class="anavbar" href="io.html">IO</a></li>
+              <li><a class="anavbar" href="net.html">NetWork</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+      <div class="panel panel-default">
+        
+    <script type="text/javascript">
+
+         $(function() {
+
+             // We use an inline data source in the example, usually data would
+             // be fetched from a server
+
+             var data = [],
+                 totalPoints = 300;
+             var readdata = [];
+             var writedata = [];
+             var recedata = [];
+             var transdata = [];
+
+             function getData() {
+                 if (data.length > 0)
+                     data = data.slice(1);
+
+                 // Do a random walk
+
+                 while (data.length < totalPoints) {
+                     var prev = data.length > 0 ? data[data.length - 1] : 50,
+                         y = prev + Math.random() * 10 - 5;
+
+                     if (y < 0) {
+                         y = 0;
+                     } else if (y > 100) {
+                         y = 100;
+                     }
+                     data.push(y);
+                 }
+
+                 // Zip the generated y values with the x values
+
+                 var res = [];
+                 for (var i = 0; i < data.length; ++i) {
+                     res.push([i, data[i]])
+                 }
+
+                 return [{label: 'CPU', data:res}];
+             }
+
+             // Set up the control widget
+
+
+             // io data
+
+             function getIoData() {
+                 if (readdata.length > 0){
+                     readdata = readdata.slice(1);
+                     writedata = writedata.slice(1);
+                }
+
+                 // Do a random walk
+
+                 while (readdata.length < totalPoints) {
+                     var prevx = readdata.length > 0 ? readdata[readdata.length - 1] : 50,
+                         x = prevx + Math.random() * 10 - 5;
+
+                     if (x < 0) {
+                         x = 0;
+                     } else if (x > 200) {
+                        x = 200;
+                     }
+
+                     var prevy = writedata.length > 0 ? writedata[writedata.length - 1] : 50,
+                         y = prevy + Math.random() * 10 - 5;
+
+                     if (y < 0) {
+                         y = 0;
+                     } else if (y > 200) {
+                         y = 200;
+                     }
+                     readdata.push(x);
+                     writedata.push(y);
+                 }
+
+                 // Zip the generated y values with the x values
+
+                 var readres = [];
+                 var writeres = [];
+                 for (var i = 0; i < readdata.length; ++i) {
+                     readres.push([i, readdata[i]])
+                 }
+                 for (var i = 0; i < writedata.length; ++i) {
+                     writeres.push([i, writedata[i]])
+                 }
+
+                 return [{label: 'READ', data: readres},{label: 'WRITE', data: writeres}];
+             }
+
+             // net data
+
+             function getNetData() {
+                 if (recedata.length > 0){
+                     recedata = recedata.slice(1);
+                     transdata = transdata.slice(1);
+                }
+
+                 // Do a random walk
+
+                 while (recedata.length < totalPoints) {
+                     var prevx = recedata.length > 0 ? recedata[recedata.length - 1] : 50,
+                         x = prevx + Math.random() * 10 - 5;
+
+                     if (x < 0) {
+                         x = 0;
+                     } else if (x > 200) {
+                        x = 200;
+                     }
+
+                     var prevy = transdata.length > 0 ? transdata[transdata.length - 1] : 50,
+                         y = prevy + Math.random() * 10 - 5;
+
+                     if (y < 0) {
+                         y = 0;
+                     } else if (y > 200) {
+                         y = 200;
+                     }
+                     recedata.push(x);
+                     transdata.push(y);
+                 }
+
+                 // Zip the generated y values with the x values
+
+                 var receres = [];
+                 var transres = [];
+                 for (var i = 0; i < recedata.length; ++i) {
+                     receres.push([i, recedata[i]])
+                 }
+                 for (var i = 0; i < transdata.length; ++i) {
+                     transres.push([i, transdata[i]])
+                 }
+
+                 return [{label: 'TRANSMIT', data: transres},{label: 'RECEIVE', data: receres}];
+             }
+            
+             var updateInterval = 1000;
+
+
+             var plot = $.plot("#placeholder",  getData(), {
+                 series: {
+                     shadowSize: 0   // Drawing is faster without shadows
+                 },
+                 yaxis: {
+                     min: 0,
+                     max: 100,
+                     tickFormatter: function suffixFormat(val, axis){
+                        return val.toFixed(axis.tickDecimals) + "%";
+                     }
+                    
+                 },
+                 xaxis: {
+                     show: false
+                 }
+             });
+
+
+
+             var ioplot = $.plot("#io", getIoData() , {
+                 series: {
+                     shadowSize: 0   // Drawing is faster without shadows
+                 },
+                 yaxis: {
+                     min: 0,
+                     max: 500,
+                     tickFormatter: function suffixFormat(val, axis){
+                        return val.toFixed(axis.tickDecimals) + " MB";
+                     }
+                 },
+                 xaxis: {
+                     show: false
+                 }
+             });
+
+             var netplot = $.plot("#net", getNetData() , {
+                 series: {
+                     shadowSize: 0   // Drawing is faster without shadows
+                 },
+                 yaxis: {
+                     min: 0,
+                     max: 300,
+                     tickFormatter: function suffixFormat(val, axis){
+                        return val.toFixed(axis.tickDecimals) + " MB";
+                     }
+                 },
+                 xaxis: {
+                     show: false
+                 }
+             });
+
+              function update() {
+
+                 plot.setData(getData());
+
+                 // Since the axes don't change, we don't need to call plot.setupGrid()
+
+                 plot.draw();
+
+                 ioplot.setData(getIoData());
+                 ioplot.draw();
+                 netplot.setData(getNetData());
+                 netplot.draw();
+
+                 setTimeout(update, updateInterval);
+             }
+
+             update();
+
+             // Add the Flot version string to the footer
+
+         });
+   </script>
+      <div class="jumbotron">
+        <h1>Ashinamo</h1>
+        <p>阿史纳摩，唐朝开国名将，李世民甚爱。 事两主，两主皆悦。 这个项目也是，不仅仅是个 C/S项目，还是个B/S项目，通过完整的技术实践，简单实现服务器集群的监控，并通过web界面动态展示波浪线变化。 基于Python + Django + Nginx + Twisted 组合。</p>
+      </div>
+      <div class="col-md-12" style="margin:0;padding:50px 0;border-bottom:1px solid #e7e7e7;">
+               <div class="col-lg-8" style="height:250px;margin:0;padding:0;">
+                <div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div>
+               </div>
+               <div class="col-lg-3 pull-right" style="height:250px;margin:0;padding:0;">
+                <!--div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div-->
+                    <h5>Memory:</h5>
+                    <div id='chart'></div>
+               </div>
+               <div class="col-lg-5" style="height:250px;margin:0;padding:0;margin-top:50px;">
+                IO:
+                <div id="io" style="width:100%;height:100%;line-height:1.2em;"></div>
+               </div>
+               <div class="col-lg-2" style="height:250px;margin:0;padding:0;margin-top:20px;">
+                </div>
+               <div class="col-lg-5" style="height:250px;margin:0;padding:0;margin-top:50px;">
+                Net:
+                <div id="net" style="width:100%;height:100%;line-height:1.2em;"></div>
+               </div>
+      </div>
+
+    <script src="plugin/memory/d3-3.5.0.min-3b564392.js" type="text/javascript"></script>
+    <script src="plugin/memory/c3.min-12912fb6.js" type="text/javascript"></script>
+    <script src="plugin/memory/chart_gauge-f691ebb1.js" type="text/javascript"></script>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <h2 class="text-center">Cpu</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+        </div>
+        <div class="col-lg-3">
+          <h2 class="text-center">Memory</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+       </div>
+        <div class="col-lg-3">
+          <h2 class="text-center">IO</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+        </div>
+        <div class="col-lg-3">
+          <h2 class="text-center">NetWork</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+        </div>
+      </div>
+
+    </div>
+    <!--content end-->
+    <!--footer start-->
+    <!--div class="container-fluid">
+    </div-->
+    <div class="container-fluid" style="border-top:1px solid #e7e7e7;margin-top:2em;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-lg-6">
+            <h4>
+              <img src="http://static.bootcss.com/www/assets/img/logo.png">
+            </h4>
+            <p><a href="http://www.pythonpie.com/">Pythonpie</a></p>
+          </div>
+          <div class="col-sm-6  col-lg-5 col-lg-offset-1">
+            <div class="row about">
+              <div class="col-xs-6 pull-right text-right">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                  <li><a href="/about/">About</a></li>
+                  <li><a href="/ad/">Contact</a></li>
+                </ul>
+              </div>
+              <div class="col-xs-6 pull-right text-right">
+                <h4>Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="http://weibo.com/bootcss" title="Bootstrap" target="_blank">sina</a></li>
+                  <li><a href="mailto:admin@bootcss.com">email</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <ul class="list-inline text-center">
+            <li><a href="http://www.miibeian.gov.cn/" target="_blank">ICP11008151</a></li><li>11010802014853</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--footer end-->
+</body>
+</html>
+

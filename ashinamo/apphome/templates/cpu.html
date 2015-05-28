@@ -10,7 +10,7 @@
                  totalPoints = 300;
 
              function getData() {
-                 if (data.length > 0)
+                 if (data.length > 0){
                      data = data.slice(1);
                      $.ajax({
                         url: "{% url 'datacpu' %}",
@@ -21,6 +21,7 @@
                             }
                         }
                      });
+                 }
 
                  // Do a random walk
 

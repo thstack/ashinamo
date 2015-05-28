@@ -11,7 +11,7 @@
             var writedata = [];
 
              function getData() {
-                 if (readdata.length > 0)
+                 if (readdata.length > 0){
                      readdata = readdata.slice(1);
                      writedata = writedata.slice(1);
                      $.ajax({
@@ -31,6 +31,7 @@
                             }
                         }
                      });
+                 }
 
                  // Do a random walk
 

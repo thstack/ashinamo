@@ -1,0 +1,207 @@
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Ashinamo</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="plugin/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="plugin/jquery.flot.js"></script>
+    <link href="plugin/memory/c3-b03125fa.css" media="screen" rel="stylesheet" type="text/css">
+    <script>
+    $(function(){
+        var localhref = window.location.pathname; 
+        $('.anavbar').each(function(){
+            if($(this).attr('href') == localhref){
+                $(this).parent().addClass('active')
+            }
+        });
+
+    });
+    </script>
+    <style>
+    .col-lg-3{
+        width: 25%; 
+    }
+    </style>
+</head>
+<body>
+    <!--content start-->
+    <div class="container">
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a class="anavbar" href="index.html">Ashinamo</a></li>
+              <li><a class="anavbar" href="cpu.html">Cpu</a></li>
+              <li class="active"><a class="anavbar" href="mem.html">Memory</a></li>
+              <li><a class="anavbar" href="io.html">IO</a></li>
+              <li><a class="anavbar" href="net.html">NetWork</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+      <div class="panel panel-default">
+        
+    <script type="text/javascript">
+         $(function() {
+
+             // We use an inline data source in the example, usually data would
+             // be fetched from a server
+
+             var data = [],
+                 totalPoints = 300;
+
+             function getData() {
+                 if (data.length > 0){
+                     data = data.slice(1);
+                     }
+                 // Do a random walk
+
+                 while (data.length < totalPoints) {
+                     var prev = data.length > 0 ? data[data.length - 1] : 50,
+                         y = prev + Math.random() * 10 - 5;
+
+                     if (y < 0) {
+                         y = 0;
+                     } else if (y > 100) {
+                         y = 100;
+                    }
+                     data.push(y);
+                 }
+
+                 // Zip the generated y values with the x values
+
+                 var res = [];
+                 for (var i = 0; i < data.length; ++i) {
+                     res.push([i, data[i]])
+                 }
+
+                 return res;
+             }
+
+             // Set up the control widget
+
+             var updateInterval = 1000;
+
+             var plot = $.plot("#placeholder", [ getData() ], {
+                 series: {
+                     shadowSize: 0   // Drawing is faster without shadows
+                 },
+                 yaxis: {
+                     min: 0,
+                     max: 100,
+                     tickFormatter: function suffixFormat(val, axis){
+                        return val.toFixed(axis.tickDecimals) + "%";
+                     }
+                 },
+                 xaxis: {
+                     show: false
+                 }
+             });
+              function update() {
+
+                 plot.setData([getData()]);
+
+                 // Since the axes don't change, we don't need to call plot.setupGrid()
+
+                 plot.draw();
+                 setTimeout(update, updateInterval);
+             }
+
+             update();
+
+             // Add the Flot version string to the footer
+
+             $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+         });
+    </script>
+       <div class="panel-heading">Mem</div>
+        <div class="panel-body">
+            <p>内存是计算机中重要的部件之一，它是与CPU进行沟通的桥梁。计算机中所有程序的运行都是在内存中进行的，因此内存的性能对计算机的影响非常大。内存(Memory)也被称为内存储器，其作用是用于暂时存放CPU中的运算数据，以及与硬盘等外部存储器交换的数据。只要计算机在运行中，CPU就会把需要运算的数据调到内存中进行运算，当运算完成后CPU再将结果传送出来，内存的运行也决定了计算机的稳定运行。 内存是由内存芯片、电路板、金手指等部分组成的。</p>
+            <div class="col-md-12"><hr /></div>
+               <div class="col-lg-12" style="height:350px;margin:0;padding:0;">
+                <div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div>
+               </div>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <h2 class="text-center">Cpu</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+        </div>
+        <div class="col-lg-3">
+          <h2 class="text-center">Memory</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+       </div>
+        <div class="col-lg-3">
+          <h2 class="text-center">IO</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+        </div>
+        <div class="col-lg-3">
+          <h2 class="text-center">NetWork</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+        </div>
+      </div>
+
+    </div>
+    <!--content end-->
+    <!--footer start-->
+    <!--div class="container-fluid">
+    </div-->
+    <div class="container-fluid" style="border-top:1px solid #e7e7e7;margin-top:2em;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-lg-6">
+            <h4>
+              <img src="http://static.bootcss.com/www/assets/img/logo.png">
+            </h4>
+            <p><a href="http://www.pythonpie.com/">Pythonpie</a></p>
+          </div>
+          <div class="col-sm-6  col-lg-5 col-lg-offset-1">
+            <div class="row about">
+              <div class="col-xs-6 pull-right text-right">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                  <li><a href="/about/">About</a></li>
+                  <li><a href="/ad/">Contact</a></li>
+                </ul>
+              </div>
+              <div class="col-xs-6 pull-right text-right">
+                <h4>Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="http://weibo.com/bootcss" title="Bootstrap" target="_blank">sina</a></li>
+                  <li><a href="mailto:admin@bootcss.com">email</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <ul class="list-inline text-center">
+            <li><a href="http://www.miibeian.gov.cn/" target="_blank">ICP11008151</a></li><li>11010802014853</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--footer end-->
+</body>
+</html>
+

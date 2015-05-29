@@ -21,7 +21,7 @@
     });
     </script>
     <style>
-    .col-lg-3{
+    .col-md-3{
         width: 25%; 
     }
     </style>
@@ -270,21 +270,21 @@
         <p>阿史纳摩，唐朝开国名将，李世民甚爱。 事两主，两主皆悦。 这个项目也是，不仅仅是个 C/S项目，还是个B/S项目，通过完整的技术实践，简单实现服务器集群的监控，并通过web界面动态展示波浪线变化。 基于Python + Django + Nginx + Twisted 组合。</p>
       </div>
       <div class="col-md-12" style="margin:0;padding:50px 0;border-bottom:1px solid #e7e7e7;">
-               <div class="col-lg-8" style="height:250px;margin:0;padding:0;">
+               <div class="col-md-8" style="height:250px;margin:0;padding:0;">
                 <div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div>
                </div>
-               <div class="col-lg-3 pull-right" style="height:250px;margin:0;padding:0;">
+               <div class="col-md-3 pull-right" style="height:250px;margin:0;padding:0;">
                 <!--div id="placeholder" style="width:100%;height:100%;line-height:1.2em;"></div-->
                     <h5>Memory:</h5>
                     <div id='chart'></div>
                </div>
-               <div class="col-lg-5" style="height:250px;margin:0;padding:0;margin-top:50px;">
+               <div class="col-md-5" style="height:250px;margin:0;padding:0;margin-top:50px;">
                 IO:
                 <div id="io" style="width:100%;height:100%;line-height:1.2em;"></div>
                </div>
-               <div class="col-lg-2" style="height:250px;margin:0;padding:0;margin-top:20px;">
+               <div class="col-md-2" style="height:250px;margin:0;padding:0;margin-top:20px;">
                 </div>
-               <div class="col-lg-5" style="height:250px;margin:0;padding:0;margin-top:50px;">
+               <div class="col-md-5" style="height:250px;margin:0;padding:0;margin-top:50px;">
                 Net:
                 <div id="net" style="width:100%;height:100%;line-height:1.2em;"></div>
                </div>
@@ -296,25 +296,29 @@
 
       </div>
       <div class="row">
-        <div class="col-lg-3">
+        <div class="col-md-3">
           <h2 class="text-center">Cpu</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+          <p>中央处理器（CPU，Central Processing Unit）是一块超大规模的集成电路，是一台计算机的运算核心（Core）和控制核心（ Control Unit）。它的功能主要是解释计算机指令以及处理计算机软件中的数据。</p>
+          <p>中央处理器主要包括运算器（算术逻辑运算单元，ALU，Arithmetic Logic Unit）和高速缓冲存储器（Cache）及实现它们之间联系的数据（Data）、控制及状态的总线（Bus）。它与内部存储器（Memory）和输入/输出（I/O）设备合称为电子计算机三大核心部件。</p>
+          <p><a class="btn btn-primary btn-block" href="/cpu/" role="button">View</a></p>
         </div>
-        <div class="col-lg-3">
+        <div class="col-md-3">
           <h2 class="text-center">Memory</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+          <p>内存是计算机中重要的部件之一，它是与CPU进行沟通的桥梁。计算机中所有程序的运行都是在内存中进行的，因此内存的性能对计算机的影响非常大。</p>
+          <p>内存(Memory)也被称为内存储器，其作用是用于暂时存放CPU中的运算数据，以及与硬盘等外部存储器交换的数据。只要计算机在运行中，CPU就会把需要运算的数据调到内存中进行运算，当运算完成后CPU再将结果传送出来，内存的运行也决定了计算机的稳定运行。 内存是由内存芯片、电路板、金手指等部分组成的。</p>
+          <p><a class="btn btn-primary btn-block" href="/mem/" role="button">View</a></p>
        </div>
-        <div class="col-lg-3">
+        <div class="col-md-3">
           <h2 class="text-center">IO</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+          <p>I/O输入/输出(Input/Output),分为IO设备和IO接口两个部分。 在POSIX兼容的系统上，例如Linux系统，I/O操作可以有多种方式，比如DIO(Direct I/O),AIO(Asynchronous I/O 异步I/O),Memory-Mapped I/O(内存映设I/O)等，不同的I/O方式有不同的实现 方式和性能，在不同的应用中可以按情况选择不同的I/O方式。</p>
+          <p>不同的I/O方式有不同的方式和性能，在不同的应用中可以按情况选择不同的I/O方式。</p>
+          <p><a class="btn btn-primary btn-block" href="/io/" role="button">View</a></p>
         </div>
-        <div class="col-lg-3">
+        <div class="col-md-3">
           <h2 class="text-center">NetWork</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary btn-block" href="#" role="button">View</a></p>
+          <p>在计算机领域中，网络是信息传输、接收、共享的虚拟平台，通过它把各个点、面、体的信息联系到一起，从而实现这些资源的共享。网络是人类发展史来最重要的发明，提高了科技和人类社会的发展。</p>
+          <p>从逻辑功能上看，计算机网络是以传输信息为基础目的，用通信线路将多个计算机连接起来的计算机系统的集合，一个计算机网络组成包括传输介质和通信设备。关于计算机网络的最简单定义是：一些相互连接的、以共享资源为目的的、自治的计算机的集合。</p>
+          <p><a class="btn btn-primary btn-block" href="/net/" role="button">View</a></p>
         </div>
       </div>
 
@@ -326,13 +330,10 @@
     <div class="container-fluid" style="border-top:1px solid #e7e7e7;margin-top:2em;">
       <div class="container">
         <div class="row">
-          <div class="col-sm-6 col-lg-6">
-            <h4>
-              <img src="http://static.bootcss.com/www/assets/img/logo.png">
-            </h4>
-            <p><a href="http://www.pythonpie.com/">Pythonpie</a></p>
+          <div class="col-sm-6 col-md-6">
+            <h1><a href="http://www.pythonpie.com/" style="text-decoration:none;">Pythonpie</a></h1>
           </div>
-          <div class="col-sm-6  col-lg-5 col-lg-offset-1">
+          <div class="col-sm-6  col-md-5 col-md-offset-1">
             <div class="row about">
               <div class="col-xs-6 pull-right text-right">
                 <h4>About</h4>
@@ -345,7 +346,7 @@
                 <h4>Contact</h4>
                 <ul class="list-unstyled">
                   <li><a href="http://weibo.com/bootcss" title="Bootstrap" target="_blank">sina</a></li>
-                  <li><a href="mailto:admin@bootcss.com">email</a></li>
+                  <li><a href="mailto:admin@pythonpie.com">email</a></li>
                 </ul>
               </div>
             </div>
@@ -355,7 +356,7 @@
         <hr>
         <div class="row">
           <ul class="list-inline text-center">
-            <li><a href="http://www.miibeian.gov.cn/" target="_blank">ICP11008151</a></li><li>11010802014853</li>
+            <li><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></li><li>京公网安备11010802014853</li>
           </ul>
         </div>
       </div>

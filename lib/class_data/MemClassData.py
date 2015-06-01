@@ -3,11 +3,11 @@
 """ 获取内存数据, 从 /proc/meminfo 文件 """
 """ @Author: baoyiluo@gmail.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-25
+    @Date: 2013-6-5
     @Version: v1.2
     @Note:
         /proc/meminfo 中所需数据的解释：
-[root@hpcstack ~]# head -n 4 /proc/meminfo
+[root@ashinamo ~]# head -n 4 /proc/meminfo
 MemTotal:        1017812 kB
 MemFree:           67768 kB
 Buffers:           10280 kB

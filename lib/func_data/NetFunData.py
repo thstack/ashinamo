@@ -12,7 +12,7 @@
         本次计算的时候，用本次数据和上一次数据做减法的值,
         与两个时间戳的减法的值做除法求得最终结果(kb/s)
         /proc/net/dev 中数据的解释：
-[root@hpcstack ~]# cat /proc/net/dev
+[root@ashinamo ~]# cat /proc/net/dev
 Inter-|   Receive                                                |  Transmit
 face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
 lo:664087762 3663780    0    0    0     0          0         0 664087762 3663780    0    0    0     0       0          0

@@ -7,7 +7,7 @@
     @Version: v1.2
     @Note:
         /proc/meminfo 中所需数据的解释：
-[root@hpcstack ~]# head -n 4 /proc/meminfo
+[root@ashinamo ~]# head -n 4 /proc/meminfo
 MemTotal:        1017812 kB
 MemFree:           67768 kB
 Buffers:           10280 kB

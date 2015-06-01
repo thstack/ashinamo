@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 """ 获取内存数据, 从 /proc/meminfo 文件 """
-""" @Author: baoyiluo@gmail.com
+""" @Author: frazy@thstack.com
     @Site: www.pythonpie.com
-    @Date: 2013-6-5
+    @Date: 2015-06-05
     @Version: v1.2
     @Note:
         /proc/meminfo 中所需数据的解释：

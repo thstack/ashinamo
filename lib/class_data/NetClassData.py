@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 """ pymonitor client module: 获取网络数据，从/proc/net/dev 文件 """
-""" @Author: baoyiluo@gmail.com
+""" @Author: frazy@thstack.com
     @Site: www.pythonpie.com
-    @Date: 2013-6-5
+    @Date: 2015-06-05
     @Version: v1.2
     @Note:
         需要一个缓存文件 /tmp/proc_net_dev 来保存上一次的数据

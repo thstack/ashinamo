@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 """ 获取cpu数据， 从 /proc/stat 文件 """
-""" @Author: baoyiluo@gmail.com
+""" @Author: frazy@thstack.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-23
+    @Date: 2015-05-23
     @Version: v1.2
     @Note:
         需要一个缓冲文件 /tmp/proc_stat 来保存上一次的数据。本次计算的时候，

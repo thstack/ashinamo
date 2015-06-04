@@ -34,16 +34,18 @@ var chart = c3.generate({
     }
 });
 
-setTimeout(function () {
+setInterval(function () {
      $.ajax({
         url: "/data/mem/",
         dataType: "json",
         success:function(datas){
             if(datas[0] == 0){
                 memdata = datas[2]['memused']*100/datas[2]['memtotal'];
+                if (memdata != chart.data()[0]['values'][0]['value']){
                 chart.load({
                     columns: [['data', memdata]]
                 });
+                }
             }
         }
      });

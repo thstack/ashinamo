@@ -48,7 +48,7 @@ class MemData:
             #results['memused']=int(self.now_data['MemTotal:'])-int(self.now_data['MemFree:'])-int(self.now_data['Buffers:'])-int(self.now_data['Cached:'])
             results['memused']=int(self.now_data['MemTotal:'])-int(self.now_data['MemFree:'])
             results['buffers']=int(self.now_data['Buffers:'])
-            results['cached']=int(self.now_data['Cached:'])
+            results['cached'] = int(self.now_data['Cached:'])
             return (status,msgs,results)
         except Exception,e:
             return (-1, 'data error!', '')

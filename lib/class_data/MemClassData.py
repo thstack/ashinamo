@@ -1,13 +1,13 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 """ 获取内存数据, 从 /proc/meminfo 文件 """
 """ @Author: baoyiluo@gmail.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-25
+    @Date: 2013-6-5
     @Version: v1.2
     @Note:
         /proc/meminfo 中所需数据的解释：
-[root@hpcstack ~]# head -n 4 /proc/meminfo 
+[root@ashinamo ~]# head -n 4 /proc/meminfo
 MemTotal:        1017812 kB
 MemFree:           67768 kB
 Buffers:           10280 kB
@@ -21,14 +21,18 @@ cached是用来给文件做缓冲。
 
 """
 
+
 class MemData:
     def __init__(self):
         self.now_data = {}
+
     def get_data(self):
         """获取系统内存数据
             @Return: (status, msgs, results)
-                status = INT, Function execution status, 0 is normal, other is failure.
-                msgs = STRING, If status equal to 0, msgs is '', otherwise will be filled with error message.
+                status = INT, Function execution status,
+                0 is normal, other is failure.
+                msgs = STRING, If status equal to 0, msgs is '',
+                otherwise will be filled with error message.
                 result = DICT {  # 单位均为KB
                     'cached': 215008,
                     'memused': 747532,
@@ -36,23 +40,28 @@ class MemData:
                     'buffers': 201784
                 }
         """
-        status = 0; msgs=""; results="";
+        status = 0
+        msgs = ""
+        results = ""
         try:
-            raw_data = file('/proc/meminfo').read()
+            fp = file('/proc/meminfo')
+            raw_data = fp.read()
+            fp.close()
             temps = raw_data.strip().split('\n')
             for temp in temps:
                 tmp = temp.split()
-                self.now_data[tmp[0]]=tmp[1]
-            results={}
-            results['memtotal']=int(self.now_data['MemTotal:'])
-            #results['memused']=int(self.now_data['MemTotal:'])-int(self.now_data['MemFree:'])-int(self.now_data['Buffers:'])-int(self.now_data['Cached:'])
-            results['memused']=int(self.now_data['MemTotal:'])-int(self.now_data['MemFree:'])
-            results['buffers']=int(self.now_data['Buffers:'])
+                self.now_data[tmp[0]] = tmp[1]
+            results = {}
+            results['memtotal'] = int(self.now_data['MemTotal:'])
+            # results['memused']=int(self.now_data['MemTotal:'])-int(self.now_data['MemFree:'])-int(self.now_data['Buffers:'])-int(self.now_data['Cached:'])
+            results['memused'] = int(self.now_data['MemTotal:']) -\
+                int(self.now_data['MemFree:'])
+            results['buffers'] = int(self.now_data['Buffers:'])
             results['cached'] = int(self.now_data['Cached:'])
-            return (status,msgs,results)
-        except Exception,e:
-            return (-1, 'data error!', '')
-        
+            return (status, msgs, results)
+        except Exception, e:
+            return (-1, e + 'data error!', '')
+
 if __name__ == "__main__":
     meminfo = MemData()
     print meminfo.get_data()

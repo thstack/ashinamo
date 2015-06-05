@@ -1,16 +1,18 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 """ pymonitor client module: 获取网络数据，从/proc/net/dev 文件 """
-""" @Author: baoyiluo@gmail.com 
+""" @Author: baoyiluo@gmail.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-25
+    @Date: 2013-6-5
     @Version: v1.2
     @Note:
-        需要一个缓存文件 /tmp/proc_net_dev 来保存上一次的数据（是一个带时间戳的数据）
-        本次计算的时候，用本次数据和上一次数据做减法的值,与两个时间戳的减法的值做除法求得最终结果(kb/s)
+        需要一个缓存文件 /tmp/proc_net_dev 来保存上一次的数据
+        （是一个带时间戳的数据）
+        本次计算的时候，用本次数据和上一次数据做减法的值,与两个时间戳的减法的
+        值做除法求得最终结果(kb/s)
         /proc/net/dev 中数据的解释：
-    [root@hpcstack ~]# cat /proc/net/dev
+    [root@ashinamo ~]# cat /proc/net/dev
 Inter-|   Receive                                                |  Transmit
  face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
     lo:664087762 3663780    0    0    0     0          0         0 664087762 3663780    0    0    0     0       0          0
@@ -42,37 +44,45 @@ import re
 import time
 import simplejson as json
 
+
 class NetData:
     def __init__(self, devices):
         self.now_data = {}
         self.last_data = {}
         self.devices = devices
+
     def get_now_data(self):
         """获取网络当前系统数据
         @Return: (status, msgs, results)
-            status = INT, Function execution status, 0 is normal, other is failure.
-            msgs = STRING, If status equal to 0, msgs is '', otherwise will be filled with error message.
+            status = INT, Function execution status,
+            0 is normal, other is failure.
+            msgs = STRING, If status equal to 0, msgs is '',
+            otherwise will be filled with error message.
             result = DICT {
                 'timestamp': 1432342587.661646, #获取数据时间
                 'eth0': {
                     # 接收
                     'receive_bytes': '3196699', # 字节数
                     'receive_packets': '34412', # 包数
-                    'receive_errs': '0', # 错误包数 
+                    'receive_errs': '0', # 错误包数
                     'receive_drop': '0', # 丢弃包数
-                    'receive_fifo': '0', # (First in first out)包数/FIFO缓存错误数 
+                    'receive_fifo': '0', # (First in first out)包数/
+                    FIFO缓存错误数
                     'receive_frame': '0', # 帧数
                     'receive_compressed': '0', # 压缩包数
-                    'receive_multicast': '0',  # 多播（multicast, 比如广播包或者组播包)包数 
+                    'receive_multicast': '0',  # 多播（multicast,
+                    比如广播包或者组播包)包数
 
                     # 发送
                     'transmit_bytes': '3635965', # 字节数
                     'transmit_packets': '18783', # 包数
                     'transmit_errs': '0', # 错误包数
                     'transmit_drop': '0', # 丢弃包数
-                    'transmit_fifo': '0', # (First in first out)包数/FIFO缓存错误数
+                    'transmit_fifo': '0', # (First in first out)包数/
+                    FIFO缓存错误数
                     'transmit_colls': '0', # 接口检测到的冲突数
-                    'transmit_carrier': '0' # 连接介质出现故障次数，如：网线接触不良
+                    'transmit_carrier': '0' # 连接介质出现故障次数,
+                    如：网线接触不良
                     'transmit_compressed': '0', # 压缩(compressed)包数
                 }
 
@@ -92,9 +102,9 @@ class NetData:
                 devicedata = re.search(pat, results).group()
             except:
                 return (-2, device+' not exist', '')
-            
+
             tmp_main = devicedata.split(":")
-            tmp=tmp_main[1].split()
+            tmp = tmp_main[1].split()
             self.now_data[tmp_main[0].strip()] = {
                 'receive_bytes': tmp[0],
                 'receive_packets': tmp[1],
@@ -118,29 +128,35 @@ class NetData:
     def get_last_data(self):
         """获取上一时刻网络系统数据
         @Return: (status, msgs, results)
-            status = INT, Function execution status, 0 is normal, other is failure.
-            msgs = STRING, If status equal to 0, msgs is '', otherwise will be filled with error message.
+            status = INT, Function execution status,
+            0 is normal, other is failure.
+            msgs = STRING, If status equal to 0, msgs is '',
+            otherwise will be filled with error message.
             result = DICT {
                 'timestamp': 1432342587.661646, #获取数据时间
                 'eth0': {
                     # 接收
                     'receive_bytes': '3196699', # 字节数
                     'receive_packets': '34412', # 包数
-                    'receive_errs': '0', # 错误包数 
+                    'receive_errs': '0', # 错误包数
                     'receive_drop': '0', # 丢弃包数
-                    'receive_fifo': '0', # (First in first out)包数/FIFO缓存错误数 
+                    'receive_fifo': '0', # (First in first out)包数/
+                    FIFO缓存错误数
                     'receive_frame': '0', # 帧数
                     'receive_compressed': '0', # 压缩包数
-                    'receive_multicast': '0',  # 多播（multicast, 比如广播包或者组播包)包数 
+                    'receive_multicast': '0',  # 多播（multicast,
+                    比如广播包或者组播包)包数
 
                     # 发送
                     'transmit_bytes': '3635965', # 字节数
                     'transmit_packets': '18783', # 包数
                     'transmit_errs': '0', # 错误包数
                     'transmit_drop': '0', # 丢弃包数
-                    'transmit_fifo': '0', # (First in first out)包数/FIFO缓存错误数
+                    'transmit_fifo': '0', # (First in first out)包数/
+                    FIFO缓存错误数
                     'transmit_colls': '0', # 接口检测到的冲突数
-                    'transmit_carrier': '0' # 连接介质出现故障次数，如：网线接触不良
+                    'transmit_carrier': '0' # 连接介质出现故障次数，
+                    如：网线接触不良
                     'transmit_compressed': '0', # 压缩(compressed)包数
                 }
 
@@ -161,9 +177,11 @@ class NetData:
 
     def compute_data(self):
         """由两时刻数据，计算网络传输速率
-        @Return: (status, msgs, results) 
-                status = INT, Function execution status, 0 is normal, other is failure.
-                msgs = STRING, If status equal to 0, msgs is '', otherwise will be filled with error message.
+        @Return: (status, msgs, results)
+                status = INT, Function execution status,
+                0 is normal, other is failure.
+                msgs = STRING, If status equal to 0, msgs is '',
+                otherwise will be filled with error message.
                 results = DICT {
                     'eth0': {  #网卡eth0的传输速率
                         'receive': 0, #单位无特殊说明都是 KB/s
@@ -176,27 +194,36 @@ class NetData:
         if now_status == last_status == 0:
             # 处理两个数据，得到要计算的值
             results = {}
-            timecut = float(now_data['timestamp']) - float(last_data['timestamp'])
+            timecut =\
+                float(now_data['timestamp']) - float(last_data['timestamp'])
             if timecut > 0:
                 for key in self.devices:
-                    receive = (int(now_data[key]['receive_bytes']) - int(last_data[key]['receive_bytes']))/float(1024)/timecut 
-                    transmit = (int(now_data[key]['transmit_bytes']) - int(last_data[key]['transmit_bytes']))/float(1024)/timecut 
-                    results[key] = {'receive':int(receive), 'transmit':int(transmit)}
+                    now_data_rece = int(now_data[key]['receive_bytes'])
+                    last_data_rece = int(last_data[key]['receive_bytes'])
+                    now_data_trans = int(now_data[key]['transmit_bytes'])
+                    last_data_trans = int(last_data[key]['transmit_bytes'])
+                    receive =\
+                        (now_data_rece - last_data_rece)/float(1024)/timecut
+                    transmit =\
+                        (now_data_trans - last_data_trans)/float(1024)/timecut
+                    results[key] =\
+                        {'receive': int(receive), 'transmit': int(transmit)}
             else:
                 # 第一次加载的时候，历史数据为空，无法计算，所以初始化为0
                 for key in self.devices:
-                    results[key] = {'receive':0, 'transmit':0}
+                    results[key] = {'receive': 0, 'transmit': 0}
             return (0, '', results)
         elif now_status != 0:
             return (now_status, now_msgs, now_data)
         else:
             return (last_status, last_msgs, last_data)
-    def run(self): 
+
+    def run(self):
         """持续获取io数据
         @Return: None
         """
         while True:
-            result = self.compute_data() 
+            result = self.compute_data()
             if result[0] == 0:
                 print result
             else:
@@ -205,5 +232,5 @@ class NetData:
             time.sleep(1)
 
 if __name__ == "__main__":
-    netdata = NetData(['eth0']) 
+    netdata = NetData(['eth0'])
     netdata.run()

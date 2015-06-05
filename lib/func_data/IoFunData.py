@@ -14,7 +14,7 @@
 
         /proc/disktats 中单行数据的解释：
 
-[root@thinkpad ~]# cat /proc/diskstats | grep sda\
+[root@ashinamo ~]# cat /proc/diskstats | grep sda\
    8       0 sda 3479 5666 288738 199185 496 957 11624 11944 0 19732 211125
 第1个域：读磁盘的次数，成功完成读的总次数；
 第2个域：合并读次数；

@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 """ 获取IO数据， 从/proc/diststats 文件 """
-""" @Author: baoyiluo@gmail.com
+""" @Author: frazy@thstack.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-23
+    @Date: 2015-05-23
     @Version: v1.2
     @Note:
         需要一个缓冲文件 /tmp/last_diskstats 来保存上一次的数据
@@ -14,7 +14,7 @@
 
         /proc/disktats 中单行数据的解释：
 
-[root@thinkpad ~]# cat /proc/diskstats | grep sda\
+[root@ashinamo ~]# cat /proc/diskstats | grep sda\
    8       0 sda 3479 5666 288738 199185 496 957 11624 11944 0 19732 211125
 第1个域：读磁盘的次数，成功完成读的总次数；
 第2个域：合并读次数；

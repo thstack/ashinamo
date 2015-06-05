@@ -2,16 +2,16 @@
 # -*- coding:utf-8 -*-
 
 """ 获取cpu数据， 从 /proc/stat 文件 """
-""" @Author: baoyiluo@gmail.com
+""" @Author: frazy@thstack.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-23
+    @Date: 2015-05-23
     @Version: v1.2
     @Note:
         需要一个缓冲文件 /tmp/proc_stat 来保存上一次的数据。本次计算的时候，
         (用本次数据total和上次total做差 - 本次数据idle和上次idle做差/
          本次数据total和上次total做差)*100,当然两次有着足够短的时间间隔。
         /proc/stat 中相关数据解释：
-[root@hpcstack sbin]# cat /proc/stat |grep cpu\
+[root@ashinamo sbin]# cat /proc/stat |grep cpu\
 cpu  182835 0 64263 2012611 14849 244 20165 0 0
 单位(jiffies)：(jiffies是内核中的一个全局变量，用来记录自系统启动一来产生的
 节拍数，在linux中，一个节拍大致可理解为操作系统进程调度的最小时间片，

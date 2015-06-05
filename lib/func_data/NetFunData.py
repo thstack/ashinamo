@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 
 """ 获取网络数据，从/proc/net/dev 文件 """
-""" @Author: baoyiluo@gmail.com
+""" @Author: frazy@thstack.com
     @Site: www.pythonpie.com
-    @Date: 2013-05-23
+    @Date: 2015-05-23
     @Version: v1.2
     @Note:
         需要一个缓存文件 /tmp/proc_net_dev 来保存上一次的数据
@@ -12,7 +12,7 @@
         本次计算的时候，用本次数据和上一次数据做减法的值,
         与两个时间戳的减法的值做除法求得最终结果(kb/s)
         /proc/net/dev 中数据的解释：
-[root@hpcstack ~]# cat /proc/net/dev
+[root@ashinamo ~]# cat /proc/net/dev
 Inter-|   Receive                                                |  Transmit
 face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
 lo:664087762 3663780    0    0    0     0          0         0 664087762 3663780    0    0    0     0       0          0

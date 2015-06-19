@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+# Author: PythonPie <contact@pythonpie.com>
+# Copyright (c) 2015 - THSTACK <contact@thstack.com>
 
 """ pymonitor client module: 获取网络数据，从/proc/net/dev 文件 """
-""" @Author: frazy@thstack.com
-    @Site: www.pythonpie.com
+""" @Site: www.pythonpie.com
     @Date: 2015-06-05
     @Version: v1.2
     @Note:
@@ -11,32 +12,33 @@
         （是一个带时间戳的数据）
         本次计算的时候，用本次数据和上一次数据做减法的值,与两个时间戳的减法的
         值做除法求得最终结果(kb/s)
+
         /proc/net/dev 中数据的解释：
-    [root@ashinamo ~]# cat /proc/net/dev
-Inter-|   Receive                                                |  Transmit
- face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
-    lo:664087762 3663780    0    0    0     0          0         0 664087762 3663780    0    0    0     0       0          0
-  eth0:  651822    6311    0    0    0     0          0         0   553421    6076    0    0    0     0       0          0
-  eth1:  663326    6060    0    0    0     0          0         0   962066    4571    0    0    0     0       0          0
-interface:网卡名
-Receive(接受):
-    第一个域(bytes)：字节数
-    第二个域(packets)：包数
-    第三个域(errs)：错误包数
-    第四个域(drop)：丢弃包数
-    第五个域(fifo)：(First in first out)包数/FIFO缓存错误数
-    第六个域(frame)：帧数
-    第七个域(compressed)：压缩(compressed)包数
-    第八个域(multicast)：多播（multicast, 比如广播包或者组播包)包数
-Transmit(发送):
-    第一个域(bytes)：字节数
-    第二个域(packets)：包数
-    第三个域(errs)：错误包数
-    第四个域(drop)：丢弃包数
-    第五个域(fifo)：(First in first out)包数/FIFO缓存错误数
-    第六个域(colls): 接口检测到的冲突数
-    第七个域(carrier): 连接介质出现故障次数，如：网线接触不良
-    第八个域(compressed)：压缩(compressed)包数
+            [root@ashinamo ~]# cat /proc/net/dev
+            Inter-|   Receive                                                |  Transmit
+             face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+                lo:664087762 3663780    0    0    0     0          0         0 664087762 3663780    0    0    0     0       0          0
+              eth0:  651822    6311    0    0    0     0          0         0   553421    6076    0    0    0     0       0          0
+              eth1:  663326    6060    0    0    0     0          0         0   962066    4571    0    0    0     0       0          0
+            interface:网卡名
+            Receive(接受):
+                第一个域(bytes)：字节数
+                第二个域(packets)：包数
+                第三个域(errs)：错误包数
+                第四个域(drop)：丢弃包数
+                第五个域(fifo)：(First in first out)包数/FIFO缓存错误数
+                第六个域(frame)：帧数
+                第七个域(compressed)：压缩(compressed)包数
+                第八个域(multicast)：多播（multicast, 比如广播包或者组播包)包数
+            Transmit(发送):
+                第一个域(bytes)：字节数
+                第二个域(packets)：包数
+                第三个域(errs)：错误包数
+                第四个域(drop)：丢弃包数
+                第五个域(fifo)：(First in first out)包数/FIFO缓存错误数
+                第六个域(colls): 接口检测到的冲突数
+                第七个域(carrier): 连接介质出现故障次数，如：网线接触不良
+                第八个域(compressed)：压缩(compressed)包数
 
 """
 
@@ -53,11 +55,12 @@ class NetData:
 
     def get_now_data(self):
         """获取网络当前系统数据
+
         @Return: (status, msgs, results)
-            status = INT, Function execution status,
-            0 is normal, other is failure.
-            msgs = STRING, If status equal to 0, msgs is '',
-            otherwise will be filled with error message.
+            status = INT, # Function execution status,
+                            0 is normal, other is failure.
+            msgs = STRING, # If status equal to 0, msgs is '',
+                             otherwise will be filled with error message.
             result = DICT {
                 'timestamp': 1432342587.661646, #获取数据时间
                 'eth0': {
@@ -127,11 +130,12 @@ class NetData:
 
     def get_last_data(self):
         """获取上一时刻网络系统数据
+
         @Return: (status, msgs, results)
-            status = INT, Function execution status,
-            0 is normal, other is failure.
-            msgs = STRING, If status equal to 0, msgs is '',
-            otherwise will be filled with error message.
+            status = INT, # Function execution status,
+                            0 is normal, other is failure.
+            msgs = STRING, # If status equal to 0, msgs is '',
+                             otherwise will be filled with error message.
             result = DICT {
                 'timestamp': 1432342587.661646, #获取数据时间
                 'eth0': {
@@ -178,10 +182,10 @@ class NetData:
     def compute_data(self):
         """由两时刻数据，计算网络传输速率
         @Return: (status, msgs, results)
-                status = INT, Function execution status,
-                0 is normal, other is failure.
-                msgs = STRING, If status equal to 0, msgs is '',
-                otherwise will be filled with error message.
+                status = INT, # Function execution status,
+                                0 is normal, other is failure.
+                msgs = STRING, # If status equal to 0, msgs is '',
+                                 otherwise will be filled with error message.
                 results = DICT {
                     'eth0': {  #网卡eth0的传输速率
                         'receive': 0, #单位无特殊说明都是 KB/s
@@ -194,7 +198,7 @@ class NetData:
         if now_status == last_status == 0:
             # 处理两个数据，得到要计算的值
             results = {}
-            timecut =\
+            timecut = \
                 float(now_data['timestamp']) - float(last_data['timestamp'])
             if timecut > 0:
                 for key in self.devices:
@@ -202,11 +206,11 @@ class NetData:
                     last_data_rece = int(last_data[key]['receive_bytes'])
                     now_data_trans = int(now_data[key]['transmit_bytes'])
                     last_data_trans = int(last_data[key]['transmit_bytes'])
-                    receive =\
-                        (now_data_rece - last_data_rece)/float(1024)/timecut
-                    transmit =\
-                        (now_data_trans - last_data_trans)/float(1024)/timecut
-                    results[key] =\
+                    receive = \
+                        (now_data_rece - last_data_rece) / float(1024)/timecut
+                    transmit = \
+                        (now_data_trans - last_data_trans) / float(1024)/timecut
+                    results[key] = \
                         {'receive': int(receive), 'transmit': int(transmit)}
             else:
                 # 第一次加载的时候，历史数据为空，无法计算，所以初始化为0

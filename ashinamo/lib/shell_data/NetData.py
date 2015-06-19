@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+# Author: PythonPie <contact@pythonpie.com>
+# Copyright (c) 2015 - THSTACK <contact@thstack.com>
+
 import re
 import time
 import simplejson as json
@@ -60,8 +63,8 @@ while True:
             last_data_rece = int(last_data[key]['receive_bytes'])
             now_data_trans = int(now_data[key]['transmit_bytes'])
             last_data_trans = int(last_data[key]['transmit_bytes'])
-            receive = (now_data_rece - last_data_rece)/float(1024)/timecut
-            transmit = (now_data_trans - last_data_trans)/float(1024)/timecut
+            receive = (now_data_rece - last_data_rece) / float(1024) / timecut
+            transmit = (now_data_trans - last_data_trans) / float(1024) / timecut
             results[key] = {'receive': int(receive), 'transmit': int(transmit)}
     else:
         # 第一次加载的时候，历史数据为空，无法计算，所以初始化为0

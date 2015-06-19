@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+# Author: PythonPie <contact@pythonpie.com>
+# Copyright (c) 2015 - THSTACK <contact@thstack.com>
 
-import simplejson as json
 import time
+import simplejson as json
 
 while True:
     now_data = {}  # 当前 /proc/stat 的值
@@ -33,10 +35,10 @@ while True:
 
     # 处理两个数据，得到要计算的值
     results = {}
-    diff_total = int(now_data['total'])-int(last_data['total'])
-    diff_idle = (int(now_data['idle'])-int(last_data['idle']))
+    diff_total = int(now_data['total']) - int(last_data['total'])
+    diff_idle = (int(now_data['idle']) - int(last_data['idle']))
     if diff_total > 0:
-        real_data = 100*(float(diff_total-diff_idle)/diff_total)
+        real_data = 100 * (float(diff_total - diff_idle) / diff_total)
         results['cpuuse'] = int(round(real_data))
     else:
         # 第一次加载的时候，历史数据为空，无法计算， 所有初始化为0

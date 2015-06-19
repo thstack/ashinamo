@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
+# Author: PythonPie <contact@pythonpie.com>
+# Copyright (c) 2015 - THSTACK <contact@thstack.com>
 
-import simplejson as json
-import time
 import re
+import time
+import simplejson as json
 
 devices = ['sda']
 while True:
@@ -56,8 +58,8 @@ while True:
             last_data_read = int(last_data[key]['number_of_sectors_read'])
             now_data_write = int(now_data[key]['number_of_sectors_written'])
             last_data_write = int(last_data[key]['number_of_sectors_written'])
-            reading = (now_data_read - last_data_read)/float(2)/timecut
-            writing = (now_data_write - last_data_write)/float(2)/timecut
+            reading = (now_data_read - last_data_read) / float(2) / timecut
+            writing = (now_data_write - last_data_write) / float(2) / timecut
             results[key] = {'reading': int(reading), 'writing': int(writing)}
     else:
         # 第一次加载的时候，历史数据为空, 无法计算，所以初始化为0

@@ -1,2 +1,4 @@
 django==1.8.2
 simplejson
+tox
+flake8

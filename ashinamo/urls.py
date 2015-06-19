@@ -22,15 +22,15 @@ urlpatterns = [
     url(r'^statics/(?P<path>.*)$', 'django.views.static.serve',{"document_root":os.path.join(BASE_DIR, "./static").replace("\\","/")}),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'apphome.views.index', name="index"),
-    url(r'^cpu/$', 'apphome.views.cpu', name="cpu"),
-    url(r'^mem/$', 'apphome.views.mem', name="mem"),
-    url(r'^io/$', 'apphome.views.io', name="io"),
-    url(r'^net/$', 'apphome.views.net', name="net"),
+    url(r'^$', 'ashinamo.apphome.views.index', name="index"),
+    url(r'^cpu/$', 'ashinamo.apphome.views.cpu', name="cpu"),
+    url(r'^mem/$', 'ashinamo.apphome.views.mem', name="mem"),
+    url(r'^io/$', 'ashinamo.apphome.views.io', name="io"),
+    url(r'^net/$', 'ashinamo.apphome.views.net', name="net"),
 
 
-    url(r'^data/cpu/$', 'appdata.views.getcpu', name='datacpu'),
-    url(r'^data/mem/$', 'appdata.views.getmem', name='datamem'),
-    url(r'^data/io/$', 'appdata.views.getio', name="dataio"),
-    url(r'^data/net/$', 'appdata.views.getnet', name="datanet"),
+    url(r'^data/cpu/$', 'ashinamo.appdata.views.getcpu', name='datacpu'),
+    url(r'^data/mem/$', 'ashinamo.appdata.views.getmem', name='datamem'),
+    url(r'^data/io/$', 'ashinamo.appdata.views.getio', name="dataio"),
+    url(r'^data/net/$', 'ashinamo.appdata.views.getnet', name="datanet"),
 ]

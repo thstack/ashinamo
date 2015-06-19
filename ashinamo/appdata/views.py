@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from class_data import CpuClassData, NetClassData, IoClassData, MemClassData
+from ashinamo.lib.class_data import CpuClassData, NetClassData, IoClassData, MemClassData
 import simplejson as json
 
 # Create your views here.

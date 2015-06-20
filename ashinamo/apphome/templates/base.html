@@ -40,11 +40,11 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a class="anavbar" href="{% url 'index' %}">Ashinamo</a></li>
-              <li><a class="anavbar" href="{% url 'cpu' %}">Cpu</a></li>
-              <li><a class="anavbar" href="{% url 'mem' %}">Memory</a></li>
-              <li><a class="anavbar" href="{% url 'io' %}">IO</a></li>
-              <li><a class="anavbar" href="{% url 'net' %}">NetWork</a></li>
+              <li><a class="anavbar" href="{% url 'page_index' %}">Ashinamo</a></li>
+              <li><a class="anavbar" href="{% url 'page_cpu' %}">Cpu</a></li>
+              <li><a class="anavbar" href="{% url 'page_mem' %}">Memory</a></li>
+              <li><a class="anavbar" href="{% url 'page_io' %}">IO</a></li>
+              <li><a class="anavbar" href="{% url 'page_net' %}">NetWork</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -57,22 +57,22 @@
         <div class="col-lg-3">
           <h2 class="text-center">Cpu</h2>
           <p>中央处理器（CPU，Central Processing Unit）是一块超大规模的集成电路，是一台计算机的运算核心（Core）和控制核心（ Control Unit）。它的功能主要是解释计算机指令以及处理计算机软件中的数据。</p>
-          <p><a class="btn btn-primary btn-block" href="{% url 'cpu' %}" role="button">View</a></p>
+          <p><a class="btn btn-primary btn-block" href="{% url 'page_cpu' %}" role="button">View</a></p>
         </div>
         <div class="col-lg-3">
           <h2 class="text-center">Memory</h2>
           <p>内存是计算机中重要的部件之一，它是与CPU进行沟通的桥梁。计算机中所有程序的运行都是在内存中进行的，因此内存的性能对计算机的影响非常大。</p>
-          <p><a class="btn btn-primary btn-block" href="{% url 'mem' %}" role="button">View</a></p>
+          <p><a class="btn btn-primary btn-block" href="{% url 'page_mem' %}" role="button">View</a></p>
        </div>
         <div class="col-lg-3">
           <h2 class="text-center">IO</h2>
           <p>I/O输入/输出(Input/Output),分为IO设备和IO接口两个部分。 不同的I/O方式有不同的实现 方式和性能，在不同的应用中可以按情况选择不同的I/O方式。</p>
-          <p><a class="btn btn-primary btn-block" href="{% url 'io' %}" role="button">View</a></p>
+          <p><a class="btn btn-primary btn-block" href="{% url 'page_io' %}" role="button">View</a></p>
         </div>
         <div class="col-lg-3">
           <h2 class="text-center">NetWork</h2>
           <p>在计算机领域中，网络是信息传输、接收、共享的虚拟平台，通过它把各个点、面、体的信息联系到一起，从而实现这些资源的共享。网络是人类发展史来最重要的发明，提高了科技和人类社会的发展。</p>
-          <p><a class="btn btn-primary btn-block" href="{% url 'net' %}" role="button">View</a></p>
+          <p><a class="btn btn-primary btn-block" href="{% url 'page_net' %}" role="button">View</a></p>
         </div>
       </div>
 

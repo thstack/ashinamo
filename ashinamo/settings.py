@@ -37,8 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ashinamo.appdata',
     'ashinamo.apphome',
+    'ashinamo.appdata',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -6,15 +6,17 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from ashinamo.apphome import views
+
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'ashinamo.apphome.views.index', name="index"),
-    url(r'^cpu/$', 'ashinamo.apphome.views.cpu', name="cpu"),
-    url(r'^mem/$', 'ashinamo.apphome.views.mem', name="mem"),
-    url(r'^io/$', 'ashinamo.apphome.views.io', name="io"),
-    url(r'^net/$', 'ashinamo.apphome.views.net', name="net"),
-    url(r'^data/cpu/$', 'ashinamo.appdata.views.getcpu', name='datacpu'),
-    url(r'^data/mem/$', 'ashinamo.appdata.views.getmem', name='datamem'),
-    url(r'^data/io/$', 'ashinamo.appdata.views.getio', name="dataio"),
-    url(r'^data/net/$', 'ashinamo.appdata.views.getnet', name="datanet"),
+
+    url(r'^$', views.index, name="page_index"),
+    url(r'^cpu/$', views.cpu, name="page_cpu"),
+    url(r'^mem/$', views.mem, name="page_mem"),
+    url(r'^io/$', views.io, name="page_io"),
+    url(r'^net/$', views.net, name="page_net"),
+
+    url(r'^data/', include('ashinamo.appdata.urls')),
 ]
